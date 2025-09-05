@@ -36,7 +36,7 @@ Prerequisites:
     <li>Verify the build succeeds and my-webapp.war is generated.   <ul> <li>
 
 <h2> 3. Deploy to Apache Tomcat </h2>
+      Prerequisites:
+<ul> <li>Tomcat installed (http://localhost:8080/manager accessible) </li>
+<li> Jenkins has the Deploy to container plugin installed.</li> </ul>
 
-Prerequisites:
-   <ul> <li>	Tomcat installed (http://localhost:8080/manager accessible)<ul> <li>
-   <ul> <li> Jenkins has the Deploy to container plugin installed.<ul> <li>
