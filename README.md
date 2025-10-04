@@ -32,11 +32,57 @@ Prerequisites:
     <ul><li>Under Post-build Actions, add Archive the artifacts.</li>
     <li>Enter **/*.war to save the WAR file.</li> </ul>
 6.	Save & Run Build:
-   <ul> <li>	Click Save, then Build Now.</li>
-    <li>Verify the build succeeds and my-webapp.war is generated.   <ul> <li>
+   <ul> 
+    <li>Click Save, then Build Now.</li>
+    <li>Verify the build succeeds and my-webapp.war is generated.</li> 
+   </ul>
+    
+<h2>3. Deploy to Apache Tomcat</h2>
+Prerequisites:
+<ul> 
+<li>Tomcat installed (http://localhost:8080/manager accessible)</li>
+<li> Jenkins has the Deploy to container plugin installed.</li> 
+</ul>
+<h2>Steps:</h2>
 
-<h2> 3. Deploy to Apache Tomcat </h2>
-      Prerequisites:
-<ul> <li>Tomcat installed (http://localhost:8080/manager accessible) </li>
-<li> Jenkins has the Deploy to container plugin installed.</li> </ul>
+1. Configure Tomcat Manager Access:
+<ul> 
+<li>	Edit conf/tomcat-users.xml:</li>
+</ul> 
+
+2.	Add Tomcat credentials in Jenkins:
+<ul>
+<li> Go to Manage Jenkins → Credentials → System → Global credentials → Add Credentials.</li>
+<li>Choose Username with password: </li>
+	Username: admin <br>
+	Password: admin <br>
+	ID: tomcat-creds (optional)
+  </ul>
+3.	Add Post-build Deployment in Jenkins:
+<ul>
+<li> Go back to your Jenkins job → Configure.</li>
+<li> Under Post-build Actions, add Deploy war/ear to a container.</li>
+<li> Configure:</li>
+	WAR/EAR files: **/*.war (or target/my-webapp.war) <br>
+	Context path: /my-webapp (leave empty for root /) <br>
+	Containers: Select Tomcat 9.x and enter: <br>
+	Manager credentials: admin:admin (or select from credentials) <br>
+	Tomcat URL: http://localhost:8080
+</ul>
+  
+4.	Run the Build Again:
+<ul>
+<li>	Jenkins will now deploy the WAR to Tomcat. </li>
+<li> Verify at: http://localhost:8080/my-webapp/hello </li>
+
+</ul>
+
+<h1> Final Output </h1>
+
+<b>•	Access your deployed app at:</b>
+
+(http://<tomcat-server>:8080/my-webapp/hello)  <br>
+You should see:
+<b> "Hello from Jenkins & Maven!" </b>
+
 
